@@ -1,6 +1,7 @@
-# Exchange
+# OMS
 
-> Deals with incomming orders, low-level execution and exchange apis
+> Pan Order Management System
 
-* limit orders, market orders etc
-* exchange balance + other generic exchange interactions
+* exchange interaction (abstracts away exchanges) / also router?
+* low-level/primitive order execution
+* order mangement (open orders)
