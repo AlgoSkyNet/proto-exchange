@@ -1,7 +1,10 @@
-all: clean build
+all: clean proto-build mvn-build
 
 clean:
 	mvn clean
 
-build:
+proto-build:
+	protoc --java_out src/main/java src/main/proto/oms.proto
+
+mvn-build:
 	mvn compile assembly:single
