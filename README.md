@@ -1,6 +1,6 @@
-# OMS
+# 0ms 
 
-> Pan Order Management System
+> Pan 0rder Management System
 
 * exchange interaction (abstracts away exchanges) / also router?
 * low-level/primitive order execution
