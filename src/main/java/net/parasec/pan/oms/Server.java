@@ -24,15 +24,23 @@ public class Server {
 			// raw in
             		byte[] in = socket.recv(0);
 
-			System.out.println("message received");		
-
+			System.out.println("message received");
+			System.out.println(java.util.Arrays.toString(in));
+			System.out.println("[" + new String(in) + "]");
+			
+			OMSWire.OMSResponse.Status status = OMSWire.OMSResponse.Status.OK;
+			try {
 			// request 
 			OMSWire.OMSRequest omsRequest = OMSWire.OMSRequest.parseFrom(in);
 			OMSWire.OMSRequest.Command command = omsRequest.getCommand();
             		System.out.println("command: " + command.name());
+			
+			} catch(Exception e) {
+				e.printStackTrace();
+				status = OMSWire.OMSResponse.Status.NOK;
+			}
 
 			// response
-			OMSWire.OMSResponse.Status status = OMSWire.OMSResponse.Status.OK;
 			OMSWire.OMSResponse omsResponse = OMSWire.OMSResponse.newBuilder()
 					.setStatus(status)
 					.setInternalOrderId(orderId++)
@@ -40,8 +48,9 @@ public class Server {
 	
 			// raw out
 			// .getBytes(ZMQ.CHARSET) ?
-			byte[] out = omsResponse.toByteArray();
-            		socket.send(out, 0);
+			//byte[] out = omsResponse.toByteArray();
+            		//socket.send(out, 0);
+			socket.send("OK".getBytes(ZMQ.CHARSET));
         	}
         	socket.close();
         	context.term();
