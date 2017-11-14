@@ -18,9 +18,13 @@ public class Server {
 		System.out.println("johnny 5 alive");
 		
         	while (!Thread.currentThread().isInterrupted()) {
+			
+			System.out.println("waiting");
 
 			// raw in
             		byte[] in = socket.recv(0);
+
+			System.out.println("message received");		
 
 			// request 
 			OMSWire.OMSRequest omsRequest = OMSWire.OMSRequest.parseFrom(in);
