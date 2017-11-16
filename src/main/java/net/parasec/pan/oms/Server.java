@@ -26,7 +26,6 @@ public class Server {
 
 			System.out.println("message received");
 			System.out.println(java.util.Arrays.toString(in));
-			System.out.println("[" + new String(in) + "]");
 			
 			OMSWire.OMSResponse.Status status = OMSWire.OMSResponse.Status.OK;
 			try {
@@ -48,9 +47,9 @@ public class Server {
 	
 			// raw out
 			// .getBytes(ZMQ.CHARSET) ?
-			//byte[] out = omsResponse.toByteArray();
-            		//socket.send(out, 0);
-			socket.send("OK".getBytes(ZMQ.CHARSET));
+			byte[] out = omsResponse.toByteArray();
+            		boolean sent = socket.send(out, 0);
+			System.out.println("sent " + sent + " bytes");
         	}
         	socket.close();
         	context.term();
