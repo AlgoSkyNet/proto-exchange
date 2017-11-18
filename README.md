@@ -1,10 +1,9 @@
-# 0ms 
+# Exchange 
 
-> Pan 0rder Management System
+> Pan exchange connectivity
 
 * exchange interaction (abstracts away exchanges) / also router?
 * low-level/primitive order execution
-* order mangement (open orders)
 
 ## 0mq
 

@@ -16,21 +16,22 @@ public class Server {
         	socket.bind("tcp://*:5555");
 
 		System.out.println("johnny 5 alive");
-		
+
+		byte[] out = "REP".getBytes(ZMQ.CHARSET);		
+
         	while (!Thread.currentThread().isInterrupted()) {
 			
-			System.out.println("waiting");
+			//System.out.println("waiting");
 
 			// raw in
-            		byte[] in = socket.recv(0);
-
-			System.out.println("message received");
-			System.out.println(java.util.Arrays.toString(in));
+            		byte[] req = socket.recv(0);
+			//System.out.println(java.util.Arrays.toString(req));
 			
+			/*
 			OMSWire.OMSResponse.Status status = OMSWire.OMSResponse.Status.OK;
 			try {
 			// request 
-			OMSWire.OMSRequest omsRequest = OMSWire.OMSRequest.parseFrom(in);
+			OMSWire.OMSRequest omsRequest = OMSWire.OMSRequest.parseFrom(req);
 			OMSWire.OMSRequest.Command command = omsRequest.getCommand();
             		System.out.println("command: " + command.name());
 			
@@ -48,8 +49,8 @@ public class Server {
 			// raw out
 			// .getBytes(ZMQ.CHARSET) ?
 			byte[] out = omsResponse.toByteArray();
+			*/
             		boolean sent = socket.send(out, 0);
-			System.out.println("sent " + sent + " bytes");
         	}
         	socket.close();
         	context.term();
