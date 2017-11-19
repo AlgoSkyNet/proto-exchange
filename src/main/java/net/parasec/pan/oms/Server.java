@@ -24,8 +24,9 @@ public class Server {
 			//System.out.println("waiting");
 
 			// raw in
-            		byte[] req = socket.recv(0);
+            		//byte[] req = socket.recv(0);
 			//System.out.println(java.util.Arrays.toString(req));
+			String req = socket.recvStr();
 			
 			/*
 			OMSWire.OMSResponse.Status status = OMSWire.OMSResponse.Status.OK;
@@ -50,7 +51,8 @@ public class Server {
 			// .getBytes(ZMQ.CHARSET) ?
 			byte[] out = omsResponse.toByteArray();
 			*/
-            		boolean sent = socket.send(out, 0);
+            		//boolean sent = socket.send(out, 0);
+			socket.send(req);
         	}
         	socket.close();
         	context.term();

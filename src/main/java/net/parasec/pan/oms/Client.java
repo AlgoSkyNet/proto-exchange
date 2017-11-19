@@ -12,6 +12,8 @@ import net.parasec.pan.oms.wire.OMSWire;
 public class Client {
 
 	public static void main(String[] args) {
+		String id = args[0];
+		System.out.println(id);
 
 		Context context = ZMQ.context(1);
 
@@ -21,9 +23,14 @@ public class Client {
 		int m = 1000000;
 		long l = System.currentTimeMillis();
 		for(int i = 0; i < m; i++) {
-			req.send("REQ", 0);
-			byte[] rep = req.recv(0);
+			req.send(id);
+			//byte[] rep = req.recv(0);
 			//System.out.println(java.util.Arrays.toString(rep));
+			String rep = req.recvStr();
+			if(!id.equals(rep)) {
+				System.err.println("error: " + rep);
+				System.exit(1);
+			}
 		}
 		long f = (System.currentTimeMillis() - l);
 		System.out.println(m + " messages in " + f + " ms.");
