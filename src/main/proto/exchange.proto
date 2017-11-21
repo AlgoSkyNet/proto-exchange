@@ -1,0 +1,69 @@
+/* pan-exchange api.
+ * 
+ * exposes exchange functionality.
+ */
+
+syntax = "proto3";
+
+package exchange;
+
+// java specific stuff
+option java_package = "net.parasec.pan.exchange.wire";
+option java_outer_classname = "Exchange";
+
+// exchange commands
+enum Type {
+  PING = 0; // default (just responds pong: for testing)
+  OPEN_ORDERS = 1; // list of open orders (at the exchange)
+  CANCEL = 2; // cancel order(s)
+  LIMIT = 3;  // place limit order
+}
+
+message Limit {
+  enum Side {
+    BID = 0;
+    ASK = 1;
+  }
+  int32 id = 1; // optional (used in response)
+  Side side = 2;
+  int64 price = 3;
+  int64 volume = 4;
+  string asset = 5; // btcusd
+}
+
+// Command encapsulates an exchange API command.
+message Command {
+  // so deserialiser can match payload type.
+  Type type = 1;
+  // Command payload (only 1 will be set.)
+  // note: proto2 uses "extensions":
+  // https://developers.google.com/protocol-buffers/docs/proto#extensions
+  // to do this. proto3 uses "any":
+  // https://developers.google.com/protocol-buffers/docs/proto3#any
+  // need to check this out.
+
+  // CANCEL request payload
+  message Cancel {
+    int32 order_id = 1; // optional: if null, cancel all.
+  }
+  Cancel cancel = 2;
+  // LIMIT request payload
+  Limit limit = 3;
+}
+
+message Response {
+  Type type = 1;
+  enum Status {
+    OK = 0;
+    NOK = 1;
+    NOT_SUPPORTED = 2;
+  }
+  Status status = 2;
+  // OPEN_ORDERS response payload
+  message OpenOrders {
+    repeated Limit limits = 1;   
+  }
+  OpenOrders open_orders = 3;
+  // LIMIT response payload
+  int32 order_id = 4;
+}

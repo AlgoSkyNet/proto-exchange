@@ -1,8 +1,8 @@
-package net.parasec.pan.oms;
+package net.parasec.pan.exchange;
 
 import org.zeromq.ZMQ;
 
-import net.parasec.pan.oms.wire.OMSWire;
+//import net.parasec.pan.oms.wire.OMSWire;
 
 
 public class Server { 
