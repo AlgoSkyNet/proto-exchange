@@ -9,7 +9,7 @@ package exchange;
 
 // java specific stuff
 option java_package = "net.parasec.pan.exchange.wire";
-option java_outer_classname = "Exchange";
+option java_outer_classname = "ExchangeWire";
 
 // exchange commands
 enum Type {

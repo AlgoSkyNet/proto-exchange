@@ -2,14 +2,12 @@ package net.parasec.pan.exchange;
 
 import org.zeromq.ZMQ;
 
-//import net.parasec.pan.oms.wire.OMSWire;
+import net.parasec.pan.exchange.wire.ExchangeWire;
 
 
 public class Server { 
 
 	public static void main(String[] args) throws Exception {
-
-		int orderId = 0;
 
         	ZMQ.Context context = ZMQ.context(1);
         	ZMQ.Socket socket = context.socket(ZMQ.REP);
@@ -19,42 +17,39 @@ public class Server {
 
 		byte[] out = "REP".getBytes(ZMQ.CHARSET);		
 
-        	while (!Thread.currentThread().isInterrupted()) {
+        	while(!Thread.currentThread().isInterrupted()) {
 			
-			//System.out.println("waiting");
+			System.out.println("waiting");
+            		byte[] req = socket.recv(0);
+		
+			ExchangeWire.Response.Status status = ExchangeWire.Response.Status.NOK;
+			ExchangeWire.Response.Builder resBuilder = ExchangeWire.Response.newBuilder();
 
-			// raw in
-            		//byte[] req = socket.recv(0);
-			//System.out.println(java.util.Arrays.toString(req));
-			String req = socket.recvStr();
-			
-			/*
-			OMSWire.OMSResponse.Status status = OMSWire.OMSResponse.Status.OK;
 			try {
-			// request 
-			OMSWire.OMSRequest omsRequest = OMSWire.OMSRequest.parseFrom(req);
-			OMSWire.OMSRequest.Command command = omsRequest.getCommand();
-            		System.out.println("command: " + command.name());
-			
-			} catch(Exception e) {
-				e.printStackTrace();
-				status = OMSWire.OMSResponse.Status.NOK;
-			}
+				ExchangeWire.Command command = ExchangeWire.Command.parseFrom(req);
+				
+				switch(command.getType()) {
+					case CANCEL: 
+						resBuilder.setStatus(ExchangeWire.Response.Status.OK);
+					break;
+					case LIMIT:
+						int orderId = 123;
+						resBuilder.setOrderId(orderId).setStatus(ExchangeWire.Response.Status.OK);
+					break;
+					default:
+						resBuilder.setStatus(ExchangeWire.Response.Status.NOT_SUPPORTED);
+				}
 
-			// response
-			OMSWire.OMSResponse omsResponse = OMSWire.OMSResponse.newBuilder()
-					.setStatus(status)
-					.setInternalOrderId(orderId++)
-					.build();
-	
-			// raw out
-			// .getBytes(ZMQ.CHARSET) ?
-			byte[] out = omsResponse.toByteArray();
-			*/
-            		//boolean sent = socket.send(out, 0);
-			socket.send(req);
+			} catch(Exception e) {
+				System.err.println(e);
+			}
+			ExchangeWire.Response exchangeRes = resBuilder.build();
+			byte[] res = exchangeRes.toByteArray();
+			socket.send(res, 0);
         	}
         	socket.close();
         	context.term();
 	}
+
+
 }
