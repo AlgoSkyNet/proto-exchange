@@ -1,5 +1,8 @@
 package net.parasec.pan.exchange;
 
+import java.io.FileReader;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.zeromq.ZMQ;
 
 import net.parasec.pan.exchange.wire.ExchangeWire;
@@ -7,49 +10,76 @@ import net.parasec.pan.exchange.wire.ExchangeWire;
 
 public class Server { 
 
-	public static void main(String[] args) throws Exception {
+	private Exchange exchange;
+
+	
+	public Server(Exchange exchange) {
+		this.exchange = exchange;
+	}
+
+	public void start(String host, int port) throws Exception {
 
         	ZMQ.Context context = ZMQ.context(1);
         	ZMQ.Socket socket = context.socket(ZMQ.REP);
-        	socket.bind("tcp://*:5555");
 
-		System.out.println("johnny 5 alive");
+		try {
+        		socket.bind("tcp://" + host + ":" + port);
 
-		byte[] out = "REP".getBytes(ZMQ.CHARSET);		
-
-        	while(!Thread.currentThread().isInterrupted()) {
+        		while(!Thread.currentThread().isInterrupted()) {
 			
-			System.out.println("waiting");
-            		byte[] req = socket.recv(0);
+            			byte[] req = socket.recv(0);
 		
-			ExchangeWire.Response.Status status = ExchangeWire.Response.Status.NOK;
-			ExchangeWire.Response.Builder resBuilder = ExchangeWire.Response.newBuilder();
+				ExchangeWire.Response.Status status = ExchangeWire.Response.Status.NOK;
+				ExchangeWire.Response.Builder resBuilder = ExchangeWire.Response.newBuilder();
 
-			try {
-				ExchangeWire.Command command = ExchangeWire.Command.parseFrom(req);
+				try {
+					ExchangeWire.Command command = ExchangeWire.Command.parseFrom(req);
 				
-				switch(command.getType()) {
-					case CANCEL: 
-						resBuilder.setStatus(ExchangeWire.Response.Status.OK);
-					break;
-					case LIMIT:
-						int orderId = 123;
-						resBuilder.setOrderId(orderId).setStatus(ExchangeWire.Response.Status.OK);
-					break;
-					default:
-						resBuilder.setStatus(ExchangeWire.Response.Status.NOT_SUPPORTED);
+					switch(command.getType()) {
+						case CANCEL: 
+							resBuilder.setStatus(ExchangeWire.Response.Status.OK);
+						break;
+						case LIMIT:
+							int orderId = 123;
+							resBuilder.setOrderId(orderId).setStatus(ExchangeWire.Response.Status.OK);
+						break;
+						default:
+							resBuilder.setStatus(ExchangeWire.Response.Status.NOT_SUPPORTED);
+					}
+				} catch(Exception e) {
+					System.err.println(e);
 				}
-
-			} catch(Exception e) {
-				System.err.println(e);
-			}
-			ExchangeWire.Response exchangeRes = resBuilder.build();
-			byte[] res = exchangeRes.toByteArray();
-			socket.send(res, 0);
-        	}
-        	socket.close();
-        	context.term();
+				ExchangeWire.Response exchangeRes = resBuilder.build();
+				byte[] res = exchangeRes.toByteArray();
+				socket.send(res, 0);
+        		}
+		} finally {
+        		socket.close();
+        		context.term();
+		}
 	}
 
+	public static void main(String[] args) throws Exception {
+		if(args.length == 0) {
+			System.out.println("<json conf>");
+			System.exit(0);
+		}
+		String jsonConf = args[0];
+		
+		JSONParser parser = new JSONParser();
+		JSONObject jsonObj = (JSONObject) parser.parse(new FileReader(jsonConf));
+		JSONObject serverConf = (JSONObject) jsonObj.get("server");
+		JSONObject exchangeConf = (JSONObject) jsonObj.get("exchange");
+		
+		String host = (String) serverConf.get("host");
+		int port = Integer.parseInt((String) serverConf.get("port"));
 
+		String cid = (String) exchangeConf.get("cid");
+		String key = (String) exchangeConf.get("key");
+		String sec = (String) exchangeConf.get("sec");
+
+		Exchange exchange = new FakeBitstampExchange(cid, key, sec);
+		Server server = new Server(exchange);
+		server.start(host, port);
+	}
 }
