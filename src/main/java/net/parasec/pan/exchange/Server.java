@@ -36,12 +36,29 @@ public class Server {
 					ExchangeWire.Command command = ExchangeWire.Command.parseFrom(req);
 				
 					switch(command.getType()) {
-						case CANCEL: 
-							resBuilder.setStatus(ExchangeWire.Response.Status.OK);
+						case CANCEL:
+							ExchangeWire.Command.Cancel cancel = command.getCancel();
+							String orderId = cancel.getOrderId();
+							ExchangeResponse er = exchange.cancel(orderId); 
+							if(er.isOk()) {
+								resBuilder.setStatus(ExchangeWire.Response.Status.OK);
+							} else {
+								resBuilder.setStatus(ExchangeWire.Response.Status.NOK);
+							}	
 						break;
 						case LIMIT:
-							int orderId = 123;
-							resBuilder.setOrderId(orderId).setStatus(ExchangeWire.Response.Status.OK);
+							ExchangeWire.Limit limit = command.getLimit();
+							String market = null;
+							Direction dir = null;
+							long vol = 0;
+							long price = 0;
+							ExchangeOrderResponse eor = exchange.limitOrder(market, dir, vol, price);
+							if(eor.isOk()) {
+								String orderId = eor.getExchangeOrderId();
+								resBuilder.setOrderId(orderId).setStatus(ExchangeWire.Response.Status.OK);
+							} else {
+								resBuilder.setStatus(ExchangeWire.Response.Status.NOK);
+							}
 						break;
 						default:
 							resBuilder.setStatus(ExchangeWire.Response.Status.NOT_SUPPORTED);

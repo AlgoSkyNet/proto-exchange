@@ -100,14 +100,14 @@ public class BitstampExchange implements Exchange {
 		}
 	}
 
-	private String attemptCancel(int orderId) throws Exception {
+	private String attemptCancel(string orderId) throws Exception {
 		final String url = "https://www.bitstamp.net/api/cancel_order/";
 		final Map<String, String> params = initParams();
-		params.put("id", Integer.toString(orderId));
+		params.put("id", orderId); 
 		return http.post(url, params);
 	}
 
-	public ExchangeResponse cancel(int orderId) { 
+	public ExchangeResponse cancel(String orderId) { 
 		String resp = null;
 		try {
 			resp = attemptCancel(orderId);
@@ -127,7 +127,7 @@ public class BitstampExchange implements Exchange {
 	}
 
 	// not used yet - attempt cancel with with backoff/retry
-	private boolean cancel(int orderId, int delay) throws Exception {
+	private boolean cancel(String orderId, int delay) throws Exception {
 		String response = attemptCancel(orderId);
 		if("true".equals(response)) {
 	    		return true;
