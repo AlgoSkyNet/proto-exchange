@@ -29,7 +29,7 @@ public class Server {
                 }
 	}
 
-	private void hsndleLimit(ExchangeWire.Response.Builder resBuilder,
+	private void handleLimit(ExchangeWire.Response.Builder resBuilder,
                                  ExchangeWire.Command command) {
 		ExchangeWire.Limit limit = command.getLimit();
                 String market = limit.getAsset();

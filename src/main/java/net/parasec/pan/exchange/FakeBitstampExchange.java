@@ -19,7 +19,7 @@ public class FakeBitstampExchange implements Exchange {
 	}
 
 	public ExchangeOrderResponse limitOrder(String market, Direction direction, long volume, long price) {
-		Sytem.out.println(market + "/" + direction + "/" + volume + "/" + price);
+		System.out.println(market + "/" + direction + "/" + volume + "/" + price);
 		return new ExchangeOrderResponse(Integer.toString(fakeId++), "OK");
 	}
 

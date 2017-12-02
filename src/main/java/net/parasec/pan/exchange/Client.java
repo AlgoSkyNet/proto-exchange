@@ -39,8 +39,8 @@ public class Client {
 			try {
 				ExchangeWire.Response response = ExchangeWire.Response.parseFrom(rep);
 				if(response.getStatus().equals(ExchangeWire.Response.Status.OK)) {
-					int orderId = response.getOrderId();
-					assert orderId == 123;
+					String orderId = response.getOrderId();
+					assert orderId.equals("123");
 				} else {
 					System.err.println("nope.");
 				}
