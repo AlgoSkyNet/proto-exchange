@@ -175,9 +175,18 @@ public final class ExchangeWire {
      * optional (used in response)
      * </pre>
      *
-     * <code>int32 id = 1;</code>
+     * <code>string id = 1;</code>
      */
-    int getId();
+    java.lang.String getId();
+    /**
+     * <pre>
+     * optional (used in response)
+     * </pre>
+     *
+     * <code>string id = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getIdBytes();
 
     /**
      * <code>.exchange.Limit.Side side = 2;</code>
@@ -229,7 +238,7 @@ public final class ExchangeWire {
       super(builder);
     }
     private Limit() {
-      id_ = 0;
+      id_ = "";
       side_ = 0;
       price_ = 0L;
       volume_ = 0L;
@@ -264,9 +273,10 @@ public final class ExchangeWire {
               }
               break;
             }
-            case 8: {
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
 
-              id_ = input.readInt32();
+              id_ = s;
               break;
             }
             case 16: {
@@ -414,16 +424,45 @@ public final class ExchangeWire {
     }
 
     public static final int ID_FIELD_NUMBER = 1;
-    private int id_;
+    private volatile java.lang.Object id_;
     /**
      * <pre>
      * optional (used in response)
      * </pre>
      *
-     * <code>int32 id = 1;</code>
+     * <code>string id = 1;</code>
      */
-    public int getId() {
-      return id_;
+    public java.lang.String getId() {
+      java.lang.Object ref = id_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        id_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * optional (used in response)
+     * </pre>
+     *
+     * <code>string id = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIdBytes() {
+      java.lang.Object ref = id_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        id_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int SIDE_FIELD_NUMBER = 2;
@@ -514,8 +553,8 @@ public final class ExchangeWire {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (id_ != 0) {
-        output.writeInt32(1, id_);
+      if (!getIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, id_);
       }
       if (side_ != net.parasec.pan.exchange.wire.ExchangeWire.Limit.Side.BID.getNumber()) {
         output.writeEnum(2, side_);
@@ -537,9 +576,8 @@ public final class ExchangeWire {
       if (size != -1) return size;
 
       size = 0;
-      if (id_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, id_);
+      if (!getIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, id_);
       }
       if (side_ != net.parasec.pan.exchange.wire.ExchangeWire.Limit.Side.BID.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
@@ -572,8 +610,8 @@ public final class ExchangeWire {
       net.parasec.pan.exchange.wire.ExchangeWire.Limit other = (net.parasec.pan.exchange.wire.ExchangeWire.Limit) obj;
 
       boolean result = true;
-      result = result && (getId()
-          == other.getId());
+      result = result && getId()
+          .equals(other.getId());
       result = result && side_ == other.side_;
       result = result && (getPrice()
           == other.getPrice());
@@ -593,7 +631,7 @@ public final class ExchangeWire {
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + ID_FIELD_NUMBER;
-      hash = (53 * hash) + getId();
+      hash = (53 * hash) + getId().hashCode();
       hash = (37 * hash) + SIDE_FIELD_NUMBER;
       hash = (53 * hash) + side_;
       hash = (37 * hash) + PRICE_FIELD_NUMBER;
@@ -733,7 +771,7 @@ public final class ExchangeWire {
       }
       public Builder clear() {
         super.clear();
-        id_ = 0;
+        id_ = "";
 
         side_ = 0;
 
@@ -811,8 +849,9 @@ public final class ExchangeWire {
 
       public Builder mergeFrom(net.parasec.pan.exchange.wire.ExchangeWire.Limit other) {
         if (other == net.parasec.pan.exchange.wire.ExchangeWire.Limit.getDefaultInstance()) return this;
-        if (other.getId() != 0) {
-          setId(other.getId());
+        if (!other.getId().isEmpty()) {
+          id_ = other.id_;
+          onChanged();
         }
         if (other.side_ != 0) {
           setSideValue(other.getSideValue());
@@ -854,26 +893,59 @@ public final class ExchangeWire {
         return this;
       }
 
-      private int id_ ;
+      private java.lang.Object id_ = "";
       /**
        * <pre>
        * optional (used in response)
        * </pre>
        *
-       * <code>int32 id = 1;</code>
+       * <code>string id = 1;</code>
        */
-      public int getId() {
-        return id_;
+      public java.lang.String getId() {
+        java.lang.Object ref = id_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          id_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
        * <pre>
        * optional (used in response)
        * </pre>
        *
-       * <code>int32 id = 1;</code>
+       * <code>string id = 1;</code>
        */
-      public Builder setId(int value) {
-        
+      public com.google.protobuf.ByteString
+          getIdBytes() {
+        java.lang.Object ref = id_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          id_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * optional (used in response)
+       * </pre>
+       *
+       * <code>string id = 1;</code>
+       */
+      public Builder setId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
         id_ = value;
         onChanged();
         return this;
@@ -883,11 +955,29 @@ public final class ExchangeWire {
        * optional (used in response)
        * </pre>
        *
-       * <code>int32 id = 1;</code>
+       * <code>string id = 1;</code>
        */
       public Builder clearId() {
         
-        id_ = 0;
+        id_ = getDefaultInstance().getId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * optional (used in response)
+       * </pre>
+       *
+       * <code>string id = 1;</code>
+       */
+      public Builder setIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        id_ = value;
         onChanged();
         return this;
       }
@@ -1297,9 +1387,18 @@ public final class ExchangeWire {
        * optional: if null, cancel all.
        * </pre>
        *
-       * <code>int32 order_id = 1;</code>
+       * <code>string order_id = 1;</code>
        */
-      int getOrderId();
+      java.lang.String getOrderId();
+      /**
+       * <pre>
+       * optional: if null, cancel all.
+       * </pre>
+       *
+       * <code>string order_id = 1;</code>
+       */
+      com.google.protobuf.ByteString
+          getOrderIdBytes();
     }
     /**
      * <pre>
@@ -1318,7 +1417,7 @@ public final class ExchangeWire {
         super(builder);
       }
       private Cancel() {
-        orderId_ = 0;
+        orderId_ = "";
       }
 
       @java.lang.Override
@@ -1349,9 +1448,10 @@ public final class ExchangeWire {
                 }
                 break;
               }
-              case 8: {
+              case 10: {
+                java.lang.String s = input.readStringRequireUtf8();
 
-                orderId_ = input.readInt32();
+                orderId_ = s;
                 break;
               }
             }
@@ -1379,16 +1479,45 @@ public final class ExchangeWire {
       }
 
       public static final int ORDER_ID_FIELD_NUMBER = 1;
-      private int orderId_;
+      private volatile java.lang.Object orderId_;
       /**
        * <pre>
        * optional: if null, cancel all.
        * </pre>
        *
-       * <code>int32 order_id = 1;</code>
+       * <code>string order_id = 1;</code>
        */
-      public int getOrderId() {
-        return orderId_;
+      public java.lang.String getOrderId() {
+        java.lang.Object ref = orderId_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          orderId_ = s;
+          return s;
+        }
+      }
+      /**
+       * <pre>
+       * optional: if null, cancel all.
+       * </pre>
+       *
+       * <code>string order_id = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getOrderIdBytes() {
+        java.lang.Object ref = orderId_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          orderId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
       }
 
       private byte memoizedIsInitialized = -1;
@@ -1403,8 +1532,8 @@ public final class ExchangeWire {
 
       public void writeTo(com.google.protobuf.CodedOutputStream output)
                           throws java.io.IOException {
-        if (orderId_ != 0) {
-          output.writeInt32(1, orderId_);
+        if (!getOrderIdBytes().isEmpty()) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 1, orderId_);
         }
         unknownFields.writeTo(output);
       }
@@ -1414,9 +1543,8 @@ public final class ExchangeWire {
         if (size != -1) return size;
 
         size = 0;
-        if (orderId_ != 0) {
-          size += com.google.protobuf.CodedOutputStream
-            .computeInt32Size(1, orderId_);
+        if (!getOrderIdBytes().isEmpty()) {
+          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, orderId_);
         }
         size += unknownFields.getSerializedSize();
         memoizedSize = size;
@@ -1434,8 +1562,8 @@ public final class ExchangeWire {
         net.parasec.pan.exchange.wire.ExchangeWire.Command.Cancel other = (net.parasec.pan.exchange.wire.ExchangeWire.Command.Cancel) obj;
 
         boolean result = true;
-        result = result && (getOrderId()
-            == other.getOrderId());
+        result = result && getOrderId()
+            .equals(other.getOrderId());
         result = result && unknownFields.equals(other.unknownFields);
         return result;
       }
@@ -1448,7 +1576,7 @@ public final class ExchangeWire {
         int hash = 41;
         hash = (19 * hash) + getDescriptor().hashCode();
         hash = (37 * hash) + ORDER_ID_FIELD_NUMBER;
-        hash = (53 * hash) + getOrderId();
+        hash = (53 * hash) + getOrderId().hashCode();
         hash = (29 * hash) + unknownFields.hashCode();
         memoizedHashCode = hash;
         return hash;
@@ -1582,7 +1710,7 @@ public final class ExchangeWire {
         }
         public Builder clear() {
           super.clear();
-          orderId_ = 0;
+          orderId_ = "";
 
           return this;
         }
@@ -1648,8 +1776,9 @@ public final class ExchangeWire {
 
         public Builder mergeFrom(net.parasec.pan.exchange.wire.ExchangeWire.Command.Cancel other) {
           if (other == net.parasec.pan.exchange.wire.ExchangeWire.Command.Cancel.getDefaultInstance()) return this;
-          if (other.getOrderId() != 0) {
-            setOrderId(other.getOrderId());
+          if (!other.getOrderId().isEmpty()) {
+            orderId_ = other.orderId_;
+            onChanged();
           }
           this.mergeUnknownFields(other.unknownFields);
           onChanged();
@@ -1678,26 +1807,59 @@ public final class ExchangeWire {
           return this;
         }
 
-        private int orderId_ ;
+        private java.lang.Object orderId_ = "";
         /**
          * <pre>
          * optional: if null, cancel all.
          * </pre>
          *
-         * <code>int32 order_id = 1;</code>
+         * <code>string order_id = 1;</code>
          */
-        public int getOrderId() {
-          return orderId_;
+        public java.lang.String getOrderId() {
+          java.lang.Object ref = orderId_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            orderId_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
         }
         /**
          * <pre>
          * optional: if null, cancel all.
          * </pre>
          *
-         * <code>int32 order_id = 1;</code>
+         * <code>string order_id = 1;</code>
          */
-        public Builder setOrderId(int value) {
-          
+        public com.google.protobuf.ByteString
+            getOrderIdBytes() {
+          java.lang.Object ref = orderId_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            orderId_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <pre>
+         * optional: if null, cancel all.
+         * </pre>
+         *
+         * <code>string order_id = 1;</code>
+         */
+        public Builder setOrderId(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  
           orderId_ = value;
           onChanged();
           return this;
@@ -1707,11 +1869,29 @@ public final class ExchangeWire {
          * optional: if null, cancel all.
          * </pre>
          *
-         * <code>int32 order_id = 1;</code>
+         * <code>string order_id = 1;</code>
          */
         public Builder clearOrderId() {
           
-          orderId_ = 0;
+          orderId_ = getDefaultInstance().getOrderId();
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         * optional: if null, cancel all.
+         * </pre>
+         *
+         * <code>string order_id = 1;</code>
+         */
+        public Builder setOrderIdBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          
+          orderId_ = value;
           onChanged();
           return this;
         }
@@ -2610,9 +2790,18 @@ public final class ExchangeWire {
      * LIMIT response payload
      * </pre>
      *
-     * <code>int32 order_id = 4;</code>
+     * <code>string order_id = 4;</code>
      */
-    int getOrderId();
+    java.lang.String getOrderId();
+    /**
+     * <pre>
+     * LIMIT response payload
+     * </pre>
+     *
+     * <code>string order_id = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getOrderIdBytes();
   }
   /**
    * Protobuf type {@code exchange.Response}
@@ -2629,7 +2818,7 @@ public final class ExchangeWire {
     private Response() {
       type_ = 0;
       status_ = 0;
-      orderId_ = 0;
+      orderId_ = "";
     }
 
     @java.lang.Override
@@ -2685,9 +2874,10 @@ public final class ExchangeWire {
 
               break;
             }
-            case 32: {
+            case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
 
-              orderId_ = input.readInt32();
+              orderId_ = s;
               break;
             }
           }
@@ -3637,16 +3827,45 @@ public final class ExchangeWire {
     }
 
     public static final int ORDER_ID_FIELD_NUMBER = 4;
-    private int orderId_;
+    private volatile java.lang.Object orderId_;
     /**
      * <pre>
      * LIMIT response payload
      * </pre>
      *
-     * <code>int32 order_id = 4;</code>
+     * <code>string order_id = 4;</code>
      */
-    public int getOrderId() {
-      return orderId_;
+    public java.lang.String getOrderId() {
+      java.lang.Object ref = orderId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        orderId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * LIMIT response payload
+     * </pre>
+     *
+     * <code>string order_id = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getOrderIdBytes() {
+      java.lang.Object ref = orderId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        orderId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     private byte memoizedIsInitialized = -1;
@@ -3670,8 +3889,8 @@ public final class ExchangeWire {
       if (openOrders_ != null) {
         output.writeMessage(3, getOpenOrders());
       }
-      if (orderId_ != 0) {
-        output.writeInt32(4, orderId_);
+      if (!getOrderIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, orderId_);
       }
       unknownFields.writeTo(output);
     }
@@ -3693,9 +3912,8 @@ public final class ExchangeWire {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, getOpenOrders());
       }
-      if (orderId_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, orderId_);
+      if (!getOrderIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, orderId_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -3720,8 +3938,8 @@ public final class ExchangeWire {
         result = result && getOpenOrders()
             .equals(other.getOpenOrders());
       }
-      result = result && (getOrderId()
-          == other.getOrderId());
+      result = result && getOrderId()
+          .equals(other.getOrderId());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -3742,7 +3960,7 @@ public final class ExchangeWire {
         hash = (53 * hash) + getOpenOrders().hashCode();
       }
       hash = (37 * hash) + ORDER_ID_FIELD_NUMBER;
-      hash = (53 * hash) + getOrderId();
+      hash = (53 * hash) + getOrderId().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -3882,7 +4100,7 @@ public final class ExchangeWire {
           openOrders_ = null;
           openOrdersBuilder_ = null;
         }
-        orderId_ = 0;
+        orderId_ = "";
 
         return this;
       }
@@ -3964,8 +4182,9 @@ public final class ExchangeWire {
         if (other.hasOpenOrders()) {
           mergeOpenOrders(other.getOpenOrders());
         }
-        if (other.getOrderId() != 0) {
-          setOrderId(other.getOrderId());
+        if (!other.getOrderId().isEmpty()) {
+          orderId_ = other.orderId_;
+          onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -4199,26 +4418,59 @@ public final class ExchangeWire {
         return openOrdersBuilder_;
       }
 
-      private int orderId_ ;
+      private java.lang.Object orderId_ = "";
       /**
        * <pre>
        * LIMIT response payload
        * </pre>
        *
-       * <code>int32 order_id = 4;</code>
+       * <code>string order_id = 4;</code>
        */
-      public int getOrderId() {
-        return orderId_;
+      public java.lang.String getOrderId() {
+        java.lang.Object ref = orderId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          orderId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
        * <pre>
        * LIMIT response payload
        * </pre>
        *
-       * <code>int32 order_id = 4;</code>
+       * <code>string order_id = 4;</code>
        */
-      public Builder setOrderId(int value) {
-        
+      public com.google.protobuf.ByteString
+          getOrderIdBytes() {
+        java.lang.Object ref = orderId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          orderId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * LIMIT response payload
+       * </pre>
+       *
+       * <code>string order_id = 4;</code>
+       */
+      public Builder setOrderId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
         orderId_ = value;
         onChanged();
         return this;
@@ -4228,11 +4480,29 @@ public final class ExchangeWire {
        * LIMIT response payload
        * </pre>
        *
-       * <code>int32 order_id = 4;</code>
+       * <code>string order_id = 4;</code>
        */
       public Builder clearOrderId() {
         
-        orderId_ = 0;
+        orderId_ = getDefaultInstance().getOrderId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * LIMIT response payload
+       * </pre>
+       *
+       * <code>string order_id = 4;</code>
+       */
+      public Builder setOrderIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        orderId_ = value;
         onChanged();
         return this;
       }
@@ -4320,17 +4590,17 @@ public final class ExchangeWire {
   static {
     java.lang.String[] descriptorData = {
       "\n\035src/main/proto/exchange.proto\022\010exchang" +
-      "e\"\177\n\005Limit\022\n\n\002id\030\001 \001(\005\022\"\n\004side\030\002 \001(\0162\024.e" +
+      "e\"\177\n\005Limit\022\n\n\002id\030\001 \001(\t\022\"\n\004side\030\002 \001(\0162\024.e" +
       "xchange.Limit.Side\022\r\n\005price\030\003 \001(\003\022\016\n\006vol" +
       "ume\030\004 \001(\003\022\r\n\005asset\030\005 \001(\t\"\030\n\004Side\022\007\n\003BID\020" +
       "\000\022\007\n\003ASK\020\001\"\215\001\n\007Command\022\034\n\004type\030\001 \001(\0162\016.e" +
       "xchange.Type\022(\n\006cancel\030\002 \001(\0132\030.exchange." +
       "Command.Cancel\022\036\n\005limit\030\003 \001(\0132\017.exchange" +
-      ".Limit\032\032\n\006Cancel\022\020\n\010order_id\030\001 \001(\005\"\366\001\n\010R" +
+      ".Limit\032\032\n\006Cancel\022\020\n\010order_id\030\001 \001(\t\"\366\001\n\010R" +
       "esponse\022\034\n\004type\030\001 \001(\0162\016.exchange.Type\022)\n" +
       "\006status\030\002 \001(\0162\031.exchange.Response.Status",
       "\0222\n\013open_orders\030\003 \001(\0132\035.exchange.Respons" +
-      "e.OpenOrders\022\020\n\010order_id\030\004 \001(\005\032-\n\nOpenOr" +
+      "e.OpenOrders\022\020\n\010order_id\030\004 \001(\t\032-\n\nOpenOr" +
       "ders\022\037\n\006limits\030\001 \003(\0132\017.exchange.Limit\",\n" +
       "\006Status\022\006\n\002OK\020\000\022\007\n\003NOK\020\001\022\021\n\rNOT_SUPPORTE" +
       "D\020\002*8\n\004Type\022\010\n\004PING\020\000\022\017\n\013OPEN_ORDERS\020\001\022\n" +

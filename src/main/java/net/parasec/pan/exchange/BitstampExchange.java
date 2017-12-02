@@ -100,7 +100,7 @@ public class BitstampExchange implements Exchange {
 		}
 	}
 
-	private String attemptCancel(string orderId) throws Exception {
+	private String attemptCancel(String orderId) throws Exception {
 		final String url = "https://www.bitstamp.net/api/cancel_order/";
 		final Map<String, String> params = initParams();
 		params.put("id", orderId); 

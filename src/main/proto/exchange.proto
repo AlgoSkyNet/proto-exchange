@@ -24,7 +24,7 @@ message Limit {
     BID = 0;
     ASK = 1;
   }
-  int32 id = 1; // optional (used in response)
+  string id = 1; // optional (used in response)
   Side side = 2;
   int64 price = 3;
   int64 volume = 4;
@@ -44,7 +44,7 @@ message Command {
 
   // CANCEL request payload
   message Cancel {
-    int32 order_id = 1; // optional: if null, cancel all.
+    string order_id = 1; // optional: if null, cancel all.
   }
   Cancel cancel = 2;
   // LIMIT request payload
@@ -65,5 +65,5 @@ message Response {
   }
   OpenOrders open_orders = 3;
   // LIMIT response payload
-  int32 order_id = 4;
+  string order_id = 4;
 }

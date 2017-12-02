@@ -17,6 +17,35 @@ public class Server {
 		this.exchange = exchange;
 	}
 
+	private void handleCancel(ExchangeWire.Response.Builder resBuilder,
+				  ExchangeWire.Command command) {
+		ExchangeWire.Command.Cancel cancel = command.getCancel();
+                String orderId = cancel.getOrderId();
+                ExchangeResponse er = exchange.cancel(orderId);
+                if(er.isOk()) {
+                	resBuilder.setStatus(ExchangeWire.Response.Status.OK);
+                } else {
+                	resBuilder.setStatus(ExchangeWire.Response.Status.NOK);
+                }
+	}
+
+	private void hsndleLimit(ExchangeWire.Response.Builder resBuilder,
+                                 ExchangeWire.Command command) {
+		ExchangeWire.Limit limit = command.getLimit();
+                String market = limit.getAsset();
+                Direction dir = limit.getSide().equals(ExchangeWire.Limit.Side.BID)
+                		? Direction.BID : Direction.ASK;
+                long vol = limit.getVolume();
+                long price = limit.getPrice();
+                ExchangeOrderResponse eor = exchange.limitOrder(market, dir, vol, price);
+                if(eor.isOk()) {
+                	String orderId = eor.getExchangeOrderId();
+                        resBuilder.setOrderId(orderId).setStatus(ExchangeWire.Response.Status.OK);
+                } else {
+                	resBuilder.setStatus(ExchangeWire.Response.Status.NOK);
+                }
+	}
+
 	public void start(String host, int port) throws Exception {
 
         	ZMQ.Context context = ZMQ.context(1);
@@ -36,32 +65,8 @@ public class Server {
 					ExchangeWire.Command command = ExchangeWire.Command.parseFrom(req);
 				
 					switch(command.getType()) {
-						case CANCEL:
-							ExchangeWire.Command.Cancel cancel = command.getCancel();
-							String orderId = cancel.getOrderId();
-							ExchangeResponse er = exchange.cancel(orderId); 
-							if(er.isOk()) {
-								resBuilder.setStatus(ExchangeWire.Response.Status.OK);
-							} else {
-								resBuilder.setStatus(ExchangeWire.Response.Status.NOK);
-							}	
-						break;
-						case LIMIT:
-							ExchangeWire.Limit limit = command.getLimit();
-							String market = null;
-							Direction dir = null;
-							long vol = 0;
-							long price = 0;
-							ExchangeOrderResponse eor = exchange.limitOrder(market, dir, vol, price);
-							if(eor.isOk()) {
-								String orderId = eor.getExchangeOrderId();
-								resBuilder.setOrderId(orderId).setStatus(ExchangeWire.Response.Status.OK);
-							} else {
-								resBuilder.setStatus(ExchangeWire.Response.Status.NOK);
-							}
-						break;
-						default:
-							resBuilder.setStatus(ExchangeWire.Response.Status.NOT_SUPPORTED);
+						case CANCEL: handleCancel(resBuilder, command); break;
+						case LIMIT:  handleLimit(resBuilder, command);
 					}
 				} catch(Exception e) {
 					System.err.println(e);
