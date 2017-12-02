@@ -1,8 +1,13 @@
 package net.parasec.pan.exchange;
 
 import java.io.FileReader;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
+import org.apache.log4j.Level;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+
 import org.zeromq.ZMQ;
 
 import net.parasec.pan.exchange.wire.ExchangeWire;
@@ -82,6 +87,9 @@ public class Server {
 	}
 
 	public static void main(String[] args) throws Exception {
+		BasicConfigurator.configure();
+                Logger.getRootLogger().setLevel(Level.INFO);
+                Thread.currentThread().setName("pan-exchange");
 		if(args.length == 0) {
 			System.out.println("<json conf>");
 			System.exit(0);
@@ -100,7 +108,9 @@ public class Server {
 		String key = (String) exchangeConf.get("key");
 		String sec = (String) exchangeConf.get("sec");
 
-		Exchange exchange = new FakeBitstampExchange(cid, key, sec);
+		//Exchange exchange = new FakeBitstampExchange(cid, key, sec);
+		//todo: exchange router. have map of exchanges (inc. fake exchange)
+		Exchange exchange = new BitstampExchange(cid, key, sec);
 		Server server = new Server(exchange);
 		server.start(host, port);
 	}

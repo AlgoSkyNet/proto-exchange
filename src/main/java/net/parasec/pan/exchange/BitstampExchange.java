@@ -16,13 +16,14 @@ public class BitstampExchange implements Exchange {
 	private String key;
 	private String sec;
 
-	private int lastNonce = 0;
+	private long lastNonce = System.currentTimeMillis();
 
 	
 	public BitstampExchange(String cid, String key, String sec) {
 		this.cid = cid;
 		this.key = key;
 		this.sec = sec;
+		LOG.info("new bitstamp-exchange connection. start_nonce = " + lastNonce);	
 	}
 
 	private String hash(String nonce, String cid, String sec, String key) {
@@ -41,12 +42,7 @@ public class BitstampExchange implements Exchange {
 	}
 
 	private String getNonce() {
-		int n = (int) (System.currentTimeMillis()/1000L);
-		if(n <= lastNonce) {
-			n = lastNonce+1;
-		}
-		lastNonce = n;
-		return Integer.toString(n);
+		return Long.toString(lastNonce++);
 	}
 
 	private Map<String,String> initParams() {
@@ -82,18 +78,23 @@ public class BitstampExchange implements Exchange {
 		String response = null;
 
 		try {
+			LOG.info(direction + " " + btc + "BTC @ $" + usd);
+			long l = System.currentTimeMillis();
 			response = http.post(url, params);
-			LOG.debug(response);
-		} catch(final Exception e1) {
+			LOG.info("bitstamp api raw response: " + response + " (" + (System.currentTimeMillis() - l) + "ms)");
+		} catch(Exception e1) {
 			return new ExchangeOrderResponse(false, ExchangeError.CONNECTION_ERROR, e1.getMessage());
 		}
 
 		if(response == null)
 			return new ExchangeOrderResponse(false, ExchangeError.UNKNOWN, "null response");
-
 		try {
-			BitstampJSON.ExchangeOrder eo = BitstampJSON.parseExchangeOrder(response);
-			return new ExchangeOrderResponse(Integer.toString(eo.getId()), response);
+			if(response.contains("error")) {
+				return new ExchangeOrderResponse(false, ExchangeError.UNEXPECTED_RESPONSE, response);
+			} else {
+				BitstampJSON.ExchangeOrder eo = BitstampJSON.parseExchangeOrder(response);
+				return new ExchangeOrderResponse(Integer.toString(eo.getId()), response);
+			}
 		} catch(Exception e2) {
 			LOG.error(e2, e2);
 			return new ExchangeOrderResponse(false, ExchangeError.UNEXPECTED_RESPONSE, response);
@@ -110,18 +111,24 @@ public class BitstampExchange implements Exchange {
 	public ExchangeResponse cancel(String orderId) { 
 		String resp = null;
 		try {
+			LOG.info("cancel " + orderId);
+			long l = System.currentTimeMillis();
 			resp = attemptCancel(orderId);
+			LOG.info("bitstamp api raw response: " + resp + " (" + (System.currentTimeMillis() - l) + "ms)");
 		} catch(Exception e1) {
 			LOG.error(e1, e1);
 			return new ExchangeResponse(false, ExchangeError.CONNECTION_ERROR, e1.getMessage());
 		}
-		if(resp == null)
+		if(resp == null) {
 			return new ExchangeResponse(false, ExchangeError.UNKNOWN, "null response");		
-		
+		}
 		// this can happen if try to cancel before bitstamp processes order
 		// (they enqueue incomming orders)
 		if("{\"error\": \"Order not found\"}".equals(resp)) {
 			return new ExchangeResponse(false, ExchangeError.INVALID_ID, resp);
+		}
+		if(resp.contains("error")) {
+			return new ExchangeResponse(false, ExchangeError.UNKNOWN, resp);
 		}
 		return new ExchangeResponse();
 	}
