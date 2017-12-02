@@ -30,7 +30,7 @@ public class Client {
 				.setLimit(limit)
 				.build();
 
-		int m = 1000000;
+		int m = 10;
 		long l = System.currentTimeMillis();
 		for(int i = 0; i < m; i++) {
 			byte[] commandRaw = command.toByteArray();
@@ -40,7 +40,7 @@ public class Client {
 				ExchangeWire.Response response = ExchangeWire.Response.parseFrom(rep);
 				if(response.getStatus().equals(ExchangeWire.Response.Status.OK)) {
 					String orderId = response.getOrderId();
-					assert orderId.equals("123");
+					System.out.println(orderId);
 				} else {
 					System.err.println("nope.");
 				}
