@@ -1,0 +1,11 @@
+{
+  "server": {
+    "host": "localhost",
+    "port": 5555
+  },
+  "exchange": {
+    "cid" : "my_cid",
+    "key": "my_key",
+    "sec": "my_sec"
+  }
+}

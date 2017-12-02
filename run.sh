@@ -7,4 +7,4 @@ if [ ! -e $JAR ] ; then
   echo "need to *make* f00."
   exit 0
 fi
-java $JAVA_OPTS -jar target/pan-exchange-jar-with-dependencies.jar
+java $JAVA_OPTS -jar target/pan-exchange-jar-with-dependencies.jar $@

@@ -94,7 +94,7 @@ public class Server {
 		JSONObject exchangeConf = (JSONObject) jsonObj.get("exchange");
 		
 		String host = (String) serverConf.get("host");
-		int port = Integer.parseInt((String) serverConf.get("port"));
+		int port = ((Long) serverConf.get("port")).intValue();
 
 		String cid = (String) exchangeConf.get("cid");
 		String key = (String) exchangeConf.get("key");
