@@ -1,58 +1,29 @@
-// test
+// test java client
 
 package net.parasec.pan.exchange;
-
-import org.zeromq.ZMQ;
-import org.zeromq.ZMQ.Context;
-import org.zeromq.ZMQ.Socket;
-
-import net.parasec.pan.exchange.wire.ExchangeWire;
 
 public class Client {
 
 	public static void main(String[] args) {
-		String id = args[0];
-		System.out.println(id);
-
-		Context context = ZMQ.context(1);
-
-        	Socket req = context.socket(ZMQ.REQ);
-        	req.connect("tcp://localhost:5555");
-
-		ExchangeWire.Limit limit = ExchangeWire.Limit.newBuilder()
-				.setSide(ExchangeWire.Limit.Side.BID)
-				.setPrice(123L)
-				.setVolume(123L)
-				.setAsset("ETHUSD")
-				.build();
-		ExchangeWire.Command command = ExchangeWire.Command.newBuilder()
-				.setType(ExchangeWire.Type.LIMIT)
-				.setLimit(limit)
-				.build();
-
+		Exchange exchange = new RemoteExchange("localhost", 5555);
+		
 		int m = 10;
 		long l = System.currentTimeMillis();
 		for(int i = 0; i < m; i++) {
-			byte[] commandRaw = command.toByteArray();
-			req.send(commandRaw);
-			byte[] rep = req.recv(0);
-			try {
-				ExchangeWire.Response response = ExchangeWire.Response.parseFrom(rep);
-				if(response.getStatus().equals(ExchangeWire.Response.Status.OK)) {
-					String orderId = response.getOrderId();
-					System.out.println(orderId);
-				} else {
-					System.err.println("nope.");
-				}
-			} catch(Exception e) {
-				System.err.println(e);
+			// 1 btc (100000000 satoshi) for 1 dollar (100 cent)
+			ExchangeOrderResponse eor = exchange.limitOrder("btcusd", Direction.ASK, 100000000, 100);
+			if(eor.isOk()) {
+				System.out.println(eor.getExchangeOrderId());
+			} else {
+				System.err.println("nope.");
 			}
+
+
+
 		}
 		long f = (System.currentTimeMillis() - l);
 		System.out.println(m + " messages in " + f + " ms.");
 		System.out.println((m / (f*0.001)) + " mesages per second.");
-        	req.close();
-        	context.term();
 	}
 
 
