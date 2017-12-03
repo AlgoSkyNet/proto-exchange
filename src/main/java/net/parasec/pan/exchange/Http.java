@@ -15,6 +15,9 @@ import java.io.ByteArrayOutputStream;
 
 // http://hc.apache.org/httpcomponents-client-ga/tutorial/html/fundamentals.html#d5e37
 
+// todo: try http://square.github.io/okhttp/
+
+
 public class Http {
 
 	private final HttpClient httpclient;
