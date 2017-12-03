@@ -10,8 +10,9 @@ import java.math.BigInteger;
 public class BitstampExchange implements Exchange {
 	private static final Logger LOG = Logger.getLogger(BitstampExchange.class);     
 
-	private final Http http = new ACHttp();
-	
+	//private final Http http = new ACHttp();
+	private final Http http = new OKHttp();	
+
 	private String cid;
 	private String key;
 	private String sec;
