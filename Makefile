@@ -7,4 +7,5 @@ proto-build:
 	protoc --java_out src/main/java src/main/proto/exchange.proto
 
 mvn-build:
+	mvn install
 	mvn compile assembly:single
