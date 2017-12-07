@@ -3,6 +3,7 @@ package net.parasec.pan.exchange;
 import org.apache.log4j.Logger;
 import java.util.Map;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -17,6 +18,7 @@ public class OKHttp implements Http {
 	private static final Logger LOG = Logger.getLogger(OKHttp.class); 
 
 	private final static String USER_AGENT = "_";
+	private final static int TIMEOUT = 300; // 5 minutes!
 
 	private final OkHttpClient client;
 
@@ -27,6 +29,10 @@ public class OKHttp implements Http {
 		client = new OkHttpClient.Builder()
                 		.retryOnConnectionFailure(true)
                         	.addInterceptor(logging)
+				.connectTimeout(TIMEOUT, TimeUnit.SECONDS)
+				.writeTimeout(TIMEOUT, TimeUnit.SECONDS)
+				.readTimeout(TIMEOUT, TimeUnit.SECONDS)
+				
                         	.build();
 	}
 	
