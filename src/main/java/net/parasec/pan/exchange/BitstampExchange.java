@@ -10,7 +10,6 @@ import java.math.BigInteger;
 public class BitstampExchange implements Exchange {
 	private static final Logger LOG = Logger.getLogger(BitstampExchange.class);     
 
-	//private final Http http = new ACHttp();
 	private final Http http = new OKHttp();	
 
 	private String cid;
@@ -48,6 +47,7 @@ public class BitstampExchange implements Exchange {
 
 	private Map<String,String> initParams() {
 		String nonce = getNonce();
+		LOG.info("nonce = " + nonce);
 
 		Map<String,String> params = new HashMap<String,String>();
 
@@ -59,8 +59,10 @@ public class BitstampExchange implements Exchange {
 	}
 
 	public ExchangeOrderResponse limitOrder(String market, Direction direction, long volume, long price) {
-		if(market == null || !market.equals("btcusd"))
-			return new ExchangeOrderResponse(false, ExchangeError.NOT_SUPPORTED, "only btcusd for now.");
+		if(market == null) 
+			return new ExchangeOrderResponse(false, ExchangeError.NOT_SUPPORTED, "you must specify an instrument.");
+		if(!(market.equals("btcusd") || market.equals("ltcusd")))
+			return new ExchangeOrderResponse(false, ExchangeError.NOT_SUPPORTED, "supported pairs: btcusd, ltcusd.");
 
 		final String url;
 		if(direction.equals(Direction.BID))
@@ -70,16 +72,23 @@ public class BitstampExchange implements Exchange {
 
 		Map<String, String> params = initParams();
 
-		String usd = String.format("%.2f", price*0.01);        // cents to dollar
-		String btc = String.format("%.8f", volume*0.00000001); // satoshi to btc
+		// ----
+		// note, for other pairs, need to switch on market type.
+		// ----
 
+		// cents to dollar
+		String usd = String.format("%.2f", price*0.01);
+
+		// satoshi to btc or photons to ltc
+		String asset = String.format("%.8f", volume*0.00000001);
+							  
 		params.put("price", usd);
-		params.put("amount", btc);
+		params.put("amount", asset);
 
 		String response = null;
 
 		try {
-			LOG.info(direction + " " + btc + "BTC @ $" + usd);
+			LOG.info(direction + " " + asset + " @ $" + usd);
 			long l = System.currentTimeMillis();
 			response = http.post(url, params);
 			LOG.info("bitstamp api raw response: " + response + " (" + (System.currentTimeMillis() - l) + "ms)");
