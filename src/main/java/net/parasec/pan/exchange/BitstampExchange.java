@@ -18,7 +18,6 @@ public class BitstampExchange implements Exchange {
 
 	private long lastNonce = System.currentTimeMillis();
 
-	
 	public BitstampExchange(String cid, String key, String sec) {
 		this.cid = cid;
 		this.key = key;
@@ -61,8 +60,6 @@ public class BitstampExchange implements Exchange {
 	public ExchangeOrderResponse limitOrder(String market, Direction direction, long volume, long price) {
 		if(market == null) 
 			return new ExchangeOrderResponse(false, ExchangeError.NOT_SUPPORTED, "you must specify an instrument.");
-		if(!(market.equals("btcusd") || market.equals("ltcusd")))
-			return new ExchangeOrderResponse(false, ExchangeError.NOT_SUPPORTED, "supported pairs: btcusd, ltcusd.");
 
 		final String url;
 		if(direction.equals(Direction.BID))
