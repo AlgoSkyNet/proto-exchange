@@ -1,11 +1,11 @@
-# Exchange 
+# proto-exchange
 
-> Pan exchange connectivity
+> exchange connectivity
 
 * exchange interaction (abstracts away exchanges) / also router?
 * low-level/primitive order execution
 
-## 0mq
+## 0mq (jeromq)
 
 * [jeromq](https://github.com/zeromq/jeromq) see [jeromq wiki](https://github.com/zeromq/jeromq/wiki)
 
