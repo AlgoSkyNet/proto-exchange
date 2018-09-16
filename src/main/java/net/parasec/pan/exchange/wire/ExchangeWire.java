@@ -255,6 +255,9 @@ public final class ExchangeWire {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -266,13 +269,6 @@ public final class ExchangeWire {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
@@ -301,6 +297,13 @@ public final class ExchangeWire {
               asset_ = s;
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -318,6 +321,7 @@ public final class ExchangeWire {
       return net.parasec.pan.exchange.wire.ExchangeWire.internal_static_exchange_Limit_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.parasec.pan.exchange.wire.ExchangeWire.internal_static_exchange_Limit_fieldAccessorTable
@@ -477,6 +481,7 @@ public final class ExchangeWire {
      * <code>.exchange.Limit.Side side = 2;</code>
      */
     public net.parasec.pan.exchange.wire.ExchangeWire.Limit.Side getSide() {
+      @SuppressWarnings("deprecation")
       net.parasec.pan.exchange.wire.ExchangeWire.Limit.Side result = net.parasec.pan.exchange.wire.ExchangeWire.Limit.Side.valueOf(side_);
       return result == null ? net.parasec.pan.exchange.wire.ExchangeWire.Limit.Side.UNRECOGNIZED : result;
     }
@@ -542,6 +547,7 @@ public final class ExchangeWire {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -551,6 +557,7 @@ public final class ExchangeWire {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (!getIdBytes().isEmpty()) {
@@ -571,6 +578,7 @@ public final class ExchangeWire {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -717,6 +725,7 @@ public final class ExchangeWire {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -724,6 +733,7 @@ public final class ExchangeWire {
     public static Builder newBuilder(net.parasec.pan.exchange.wire.ExchangeWire.Limit prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -747,6 +757,7 @@ public final class ExchangeWire {
         return net.parasec.pan.exchange.wire.ExchangeWire.internal_static_exchange_Limit_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return net.parasec.pan.exchange.wire.ExchangeWire.internal_static_exchange_Limit_fieldAccessorTable
@@ -769,6 +780,7 @@ public final class ExchangeWire {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         id_ = "";
@@ -784,15 +796,18 @@ public final class ExchangeWire {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.parasec.pan.exchange.wire.ExchangeWire.internal_static_exchange_Limit_descriptor;
       }
 
+      @java.lang.Override
       public net.parasec.pan.exchange.wire.ExchangeWire.Limit getDefaultInstanceForType() {
         return net.parasec.pan.exchange.wire.ExchangeWire.Limit.getDefaultInstance();
       }
 
+      @java.lang.Override
       public net.parasec.pan.exchange.wire.ExchangeWire.Limit build() {
         net.parasec.pan.exchange.wire.ExchangeWire.Limit result = buildPartial();
         if (!result.isInitialized()) {
@@ -801,6 +816,7 @@ public final class ExchangeWire {
         return result;
       }
 
+      @java.lang.Override
       public net.parasec.pan.exchange.wire.ExchangeWire.Limit buildPartial() {
         net.parasec.pan.exchange.wire.ExchangeWire.Limit result = new net.parasec.pan.exchange.wire.ExchangeWire.Limit(this);
         result.id_ = id_;
@@ -812,32 +828,39 @@ public final class ExchangeWire {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.parasec.pan.exchange.wire.ExchangeWire.Limit) {
           return mergeFrom((net.parasec.pan.exchange.wire.ExchangeWire.Limit)other);
@@ -871,10 +894,12 @@ public final class ExchangeWire {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1001,6 +1026,7 @@ public final class ExchangeWire {
        * <code>.exchange.Limit.Side side = 2;</code>
        */
       public net.parasec.pan.exchange.wire.ExchangeWire.Limit.Side getSide() {
+        @SuppressWarnings("deprecation")
         net.parasec.pan.exchange.wire.ExchangeWire.Limit.Side result = net.parasec.pan.exchange.wire.ExchangeWire.Limit.Side.valueOf(side_);
         return result == null ? net.parasec.pan.exchange.wire.ExchangeWire.Limit.Side.UNRECOGNIZED : result;
       }
@@ -1166,11 +1192,13 @@ public final class ExchangeWire {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -1192,11 +1220,12 @@ public final class ExchangeWire {
 
     private static final com.google.protobuf.Parser<Limit>
         PARSER = new com.google.protobuf.AbstractParser<Limit>() {
+      @java.lang.Override
       public Limit parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Limit(input, extensionRegistry);
+        return new Limit(input, extensionRegistry);
       }
     };
 
@@ -1209,6 +1238,7 @@ public final class ExchangeWire {
       return PARSER;
     }
 
+    @java.lang.Override
     public net.parasec.pan.exchange.wire.ExchangeWire.Limit getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -1304,6 +1334,9 @@ public final class ExchangeWire {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -1315,13 +1348,6 @@ public final class ExchangeWire {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
               int rawValue = input.readEnum();
 
@@ -1354,6 +1380,13 @@ public final class ExchangeWire {
 
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1371,6 +1404,7 @@ public final class ExchangeWire {
       return net.parasec.pan.exchange.wire.ExchangeWire.internal_static_exchange_Command_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.parasec.pan.exchange.wire.ExchangeWire.internal_static_exchange_Command_fieldAccessorTable
@@ -1430,6 +1464,9 @@ public final class ExchangeWire {
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         int mutable_bitField0_ = 0;
         com.google.protobuf.UnknownFieldSet.Builder unknownFields =
             com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -1441,17 +1478,17 @@ public final class ExchangeWire {
               case 0:
                 done = true;
                 break;
+              case 10: {
+                java.lang.String s = input.readStringRequireUtf8();
+
+                orderId_ = s;
+                break;
+              }
               default: {
                 if (!parseUnknownFieldProto3(
                     input, unknownFields, extensionRegistry, tag)) {
                   done = true;
                 }
-                break;
-              }
-              case 10: {
-                java.lang.String s = input.readStringRequireUtf8();
-
-                orderId_ = s;
                 break;
               }
             }
@@ -1471,6 +1508,7 @@ public final class ExchangeWire {
         return net.parasec.pan.exchange.wire.ExchangeWire.internal_static_exchange_Command_Cancel_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return net.parasec.pan.exchange.wire.ExchangeWire.internal_static_exchange_Command_Cancel_fieldAccessorTable
@@ -1521,6 +1559,7 @@ public final class ExchangeWire {
       }
 
       private byte memoizedIsInitialized = -1;
+      @java.lang.Override
       public final boolean isInitialized() {
         byte isInitialized = memoizedIsInitialized;
         if (isInitialized == 1) return true;
@@ -1530,6 +1569,7 @@ public final class ExchangeWire {
         return true;
       }
 
+      @java.lang.Override
       public void writeTo(com.google.protobuf.CodedOutputStream output)
                           throws java.io.IOException {
         if (!getOrderIdBytes().isEmpty()) {
@@ -1538,6 +1578,7 @@ public final class ExchangeWire {
         unknownFields.writeTo(output);
       }
 
+      @java.lang.Override
       public int getSerializedSize() {
         int size = memoizedSize;
         if (size != -1) return size;
@@ -1652,6 +1693,7 @@ public final class ExchangeWire {
             .parseWithIOException(PARSER, input, extensionRegistry);
       }
 
+      @java.lang.Override
       public Builder newBuilderForType() { return newBuilder(); }
       public static Builder newBuilder() {
         return DEFAULT_INSTANCE.toBuilder();
@@ -1659,6 +1701,7 @@ public final class ExchangeWire {
       public static Builder newBuilder(net.parasec.pan.exchange.wire.ExchangeWire.Command.Cancel prototype) {
         return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
       }
+      @java.lang.Override
       public Builder toBuilder() {
         return this == DEFAULT_INSTANCE
             ? new Builder() : new Builder().mergeFrom(this);
@@ -1686,6 +1729,7 @@ public final class ExchangeWire {
           return net.parasec.pan.exchange.wire.ExchangeWire.internal_static_exchange_Command_Cancel_descriptor;
         }
 
+        @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
           return net.parasec.pan.exchange.wire.ExchangeWire.internal_static_exchange_Command_Cancel_fieldAccessorTable
@@ -1708,6 +1752,7 @@ public final class ExchangeWire {
                   .alwaysUseFieldBuilders) {
           }
         }
+        @java.lang.Override
         public Builder clear() {
           super.clear();
           orderId_ = "";
@@ -1715,15 +1760,18 @@ public final class ExchangeWire {
           return this;
         }
 
+        @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
           return net.parasec.pan.exchange.wire.ExchangeWire.internal_static_exchange_Command_Cancel_descriptor;
         }
 
+        @java.lang.Override
         public net.parasec.pan.exchange.wire.ExchangeWire.Command.Cancel getDefaultInstanceForType() {
           return net.parasec.pan.exchange.wire.ExchangeWire.Command.Cancel.getDefaultInstance();
         }
 
+        @java.lang.Override
         public net.parasec.pan.exchange.wire.ExchangeWire.Command.Cancel build() {
           net.parasec.pan.exchange.wire.ExchangeWire.Command.Cancel result = buildPartial();
           if (!result.isInitialized()) {
@@ -1732,6 +1780,7 @@ public final class ExchangeWire {
           return result;
         }
 
+        @java.lang.Override
         public net.parasec.pan.exchange.wire.ExchangeWire.Command.Cancel buildPartial() {
           net.parasec.pan.exchange.wire.ExchangeWire.Command.Cancel result = new net.parasec.pan.exchange.wire.ExchangeWire.Command.Cancel(this);
           result.orderId_ = orderId_;
@@ -1739,32 +1788,39 @@ public final class ExchangeWire {
           return result;
         }
 
+        @java.lang.Override
         public Builder clone() {
           return (Builder) super.clone();
         }
+        @java.lang.Override
         public Builder setField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
             java.lang.Object value) {
           return (Builder) super.setField(field, value);
         }
+        @java.lang.Override
         public Builder clearField(
             com.google.protobuf.Descriptors.FieldDescriptor field) {
           return (Builder) super.clearField(field);
         }
+        @java.lang.Override
         public Builder clearOneof(
             com.google.protobuf.Descriptors.OneofDescriptor oneof) {
           return (Builder) super.clearOneof(oneof);
         }
+        @java.lang.Override
         public Builder setRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
             int index, java.lang.Object value) {
           return (Builder) super.setRepeatedField(field, index, value);
         }
+        @java.lang.Override
         public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
             java.lang.Object value) {
           return (Builder) super.addRepeatedField(field, value);
         }
+        @java.lang.Override
         public Builder mergeFrom(com.google.protobuf.Message other) {
           if (other instanceof net.parasec.pan.exchange.wire.ExchangeWire.Command.Cancel) {
             return mergeFrom((net.parasec.pan.exchange.wire.ExchangeWire.Command.Cancel)other);
@@ -1785,10 +1841,12 @@ public final class ExchangeWire {
           return this;
         }
 
+        @java.lang.Override
         public final boolean isInitialized() {
           return true;
         }
 
+        @java.lang.Override
         public Builder mergeFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1895,11 +1953,13 @@ public final class ExchangeWire {
           onChanged();
           return this;
         }
+        @java.lang.Override
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
           return super.setUnknownFieldsProto3(unknownFields);
         }
 
+        @java.lang.Override
         public final Builder mergeUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
           return super.mergeUnknownFields(unknownFields);
@@ -1921,11 +1981,12 @@ public final class ExchangeWire {
 
       private static final com.google.protobuf.Parser<Cancel>
           PARSER = new com.google.protobuf.AbstractParser<Cancel>() {
+        @java.lang.Override
         public Cancel parsePartialFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-            return new Cancel(input, extensionRegistry);
+          return new Cancel(input, extensionRegistry);
         }
       };
 
@@ -1938,6 +1999,7 @@ public final class ExchangeWire {
         return PARSER;
       }
 
+      @java.lang.Override
       public net.parasec.pan.exchange.wire.ExchangeWire.Command.Cancel getDefaultInstanceForType() {
         return DEFAULT_INSTANCE;
       }
@@ -1964,6 +2026,7 @@ public final class ExchangeWire {
      * <code>.exchange.Type type = 1;</code>
      */
     public net.parasec.pan.exchange.wire.ExchangeWire.Type getType() {
+      @SuppressWarnings("deprecation")
       net.parasec.pan.exchange.wire.ExchangeWire.Type result = net.parasec.pan.exchange.wire.ExchangeWire.Type.valueOf(type_);
       return result == null ? net.parasec.pan.exchange.wire.ExchangeWire.Type.UNRECOGNIZED : result;
     }
@@ -2023,6 +2086,7 @@ public final class ExchangeWire {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -2032,6 +2096,7 @@ public final class ExchangeWire {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (type_ != net.parasec.pan.exchange.wire.ExchangeWire.Type.PING.getNumber()) {
@@ -2046,6 +2111,7 @@ public final class ExchangeWire {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -2186,6 +2252,7 @@ public final class ExchangeWire {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -2193,6 +2260,7 @@ public final class ExchangeWire {
     public static Builder newBuilder(net.parasec.pan.exchange.wire.ExchangeWire.Command prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -2220,6 +2288,7 @@ public final class ExchangeWire {
         return net.parasec.pan.exchange.wire.ExchangeWire.internal_static_exchange_Command_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return net.parasec.pan.exchange.wire.ExchangeWire.internal_static_exchange_Command_fieldAccessorTable
@@ -2242,6 +2311,7 @@ public final class ExchangeWire {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         type_ = 0;
@@ -2261,15 +2331,18 @@ public final class ExchangeWire {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.parasec.pan.exchange.wire.ExchangeWire.internal_static_exchange_Command_descriptor;
       }
 
+      @java.lang.Override
       public net.parasec.pan.exchange.wire.ExchangeWire.Command getDefaultInstanceForType() {
         return net.parasec.pan.exchange.wire.ExchangeWire.Command.getDefaultInstance();
       }
 
+      @java.lang.Override
       public net.parasec.pan.exchange.wire.ExchangeWire.Command build() {
         net.parasec.pan.exchange.wire.ExchangeWire.Command result = buildPartial();
         if (!result.isInitialized()) {
@@ -2278,6 +2351,7 @@ public final class ExchangeWire {
         return result;
       }
 
+      @java.lang.Override
       public net.parasec.pan.exchange.wire.ExchangeWire.Command buildPartial() {
         net.parasec.pan.exchange.wire.ExchangeWire.Command result = new net.parasec.pan.exchange.wire.ExchangeWire.Command(this);
         result.type_ = type_;
@@ -2295,32 +2369,39 @@ public final class ExchangeWire {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.parasec.pan.exchange.wire.ExchangeWire.Command) {
           return mergeFrom((net.parasec.pan.exchange.wire.ExchangeWire.Command)other);
@@ -2346,10 +2427,12 @@ public final class ExchangeWire {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -2399,6 +2482,7 @@ public final class ExchangeWire {
        * <code>.exchange.Type type = 1;</code>
        */
       public net.parasec.pan.exchange.wire.ExchangeWire.Type getType() {
+        @SuppressWarnings("deprecation")
         net.parasec.pan.exchange.wire.ExchangeWire.Type result = net.parasec.pan.exchange.wire.ExchangeWire.Type.valueOf(type_);
         return result == null ? net.parasec.pan.exchange.wire.ExchangeWire.Type.UNRECOGNIZED : result;
       }
@@ -2701,11 +2785,13 @@ public final class ExchangeWire {
         }
         return limitBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -2727,11 +2813,12 @@ public final class ExchangeWire {
 
     private static final com.google.protobuf.Parser<Command>
         PARSER = new com.google.protobuf.AbstractParser<Command>() {
+      @java.lang.Override
       public Command parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Command(input, extensionRegistry);
+        return new Command(input, extensionRegistry);
       }
     };
 
@@ -2744,6 +2831,7 @@ public final class ExchangeWire {
       return PARSER;
     }
 
+    @java.lang.Override
     public net.parasec.pan.exchange.wire.ExchangeWire.Command getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -2831,6 +2919,9 @@ public final class ExchangeWire {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -2842,13 +2933,6 @@ public final class ExchangeWire {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
               int rawValue = input.readEnum();
 
@@ -2880,6 +2964,13 @@ public final class ExchangeWire {
               orderId_ = s;
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -2897,6 +2988,7 @@ public final class ExchangeWire {
       return net.parasec.pan.exchange.wire.ExchangeWire.internal_static_exchange_Response_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.parasec.pan.exchange.wire.ExchangeWire.internal_static_exchange_Response_fieldAccessorTable
@@ -3069,6 +3161,9 @@ public final class ExchangeWire {
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         int mutable_bitField0_ = 0;
         com.google.protobuf.UnknownFieldSet.Builder unknownFields =
             com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -3080,13 +3175,6 @@ public final class ExchangeWire {
               case 0:
                 done = true;
                 break;
-              default: {
-                if (!parseUnknownFieldProto3(
-                    input, unknownFields, extensionRegistry, tag)) {
-                  done = true;
-                }
-                break;
-              }
               case 10: {
                 if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
                   limits_ = new java.util.ArrayList<net.parasec.pan.exchange.wire.ExchangeWire.Limit>();
@@ -3094,6 +3182,13 @@ public final class ExchangeWire {
                 }
                 limits_.add(
                     input.readMessage(net.parasec.pan.exchange.wire.ExchangeWire.Limit.parser(), extensionRegistry));
+                break;
+              }
+              default: {
+                if (!parseUnknownFieldProto3(
+                    input, unknownFields, extensionRegistry, tag)) {
+                  done = true;
+                }
                 break;
               }
             }
@@ -3116,6 +3211,7 @@ public final class ExchangeWire {
         return net.parasec.pan.exchange.wire.ExchangeWire.internal_static_exchange_Response_OpenOrders_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return net.parasec.pan.exchange.wire.ExchangeWire.internal_static_exchange_Response_OpenOrders_fieldAccessorTable
@@ -3159,6 +3255,7 @@ public final class ExchangeWire {
       }
 
       private byte memoizedIsInitialized = -1;
+      @java.lang.Override
       public final boolean isInitialized() {
         byte isInitialized = memoizedIsInitialized;
         if (isInitialized == 1) return true;
@@ -3168,6 +3265,7 @@ public final class ExchangeWire {
         return true;
       }
 
+      @java.lang.Override
       public void writeTo(com.google.protobuf.CodedOutputStream output)
                           throws java.io.IOException {
         for (int i = 0; i < limits_.size(); i++) {
@@ -3176,6 +3274,7 @@ public final class ExchangeWire {
         unknownFields.writeTo(output);
       }
 
+      @java.lang.Override
       public int getSerializedSize() {
         int size = memoizedSize;
         if (size != -1) return size;
@@ -3293,6 +3392,7 @@ public final class ExchangeWire {
             .parseWithIOException(PARSER, input, extensionRegistry);
       }
 
+      @java.lang.Override
       public Builder newBuilderForType() { return newBuilder(); }
       public static Builder newBuilder() {
         return DEFAULT_INSTANCE.toBuilder();
@@ -3300,6 +3400,7 @@ public final class ExchangeWire {
       public static Builder newBuilder(net.parasec.pan.exchange.wire.ExchangeWire.Response.OpenOrders prototype) {
         return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
       }
+      @java.lang.Override
       public Builder toBuilder() {
         return this == DEFAULT_INSTANCE
             ? new Builder() : new Builder().mergeFrom(this);
@@ -3327,6 +3428,7 @@ public final class ExchangeWire {
           return net.parasec.pan.exchange.wire.ExchangeWire.internal_static_exchange_Response_OpenOrders_descriptor;
         }
 
+        @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
           return net.parasec.pan.exchange.wire.ExchangeWire.internal_static_exchange_Response_OpenOrders_fieldAccessorTable
@@ -3350,6 +3452,7 @@ public final class ExchangeWire {
             getLimitsFieldBuilder();
           }
         }
+        @java.lang.Override
         public Builder clear() {
           super.clear();
           if (limitsBuilder_ == null) {
@@ -3361,15 +3464,18 @@ public final class ExchangeWire {
           return this;
         }
 
+        @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
           return net.parasec.pan.exchange.wire.ExchangeWire.internal_static_exchange_Response_OpenOrders_descriptor;
         }
 
+        @java.lang.Override
         public net.parasec.pan.exchange.wire.ExchangeWire.Response.OpenOrders getDefaultInstanceForType() {
           return net.parasec.pan.exchange.wire.ExchangeWire.Response.OpenOrders.getDefaultInstance();
         }
 
+        @java.lang.Override
         public net.parasec.pan.exchange.wire.ExchangeWire.Response.OpenOrders build() {
           net.parasec.pan.exchange.wire.ExchangeWire.Response.OpenOrders result = buildPartial();
           if (!result.isInitialized()) {
@@ -3378,6 +3484,7 @@ public final class ExchangeWire {
           return result;
         }
 
+        @java.lang.Override
         public net.parasec.pan.exchange.wire.ExchangeWire.Response.OpenOrders buildPartial() {
           net.parasec.pan.exchange.wire.ExchangeWire.Response.OpenOrders result = new net.parasec.pan.exchange.wire.ExchangeWire.Response.OpenOrders(this);
           int from_bitField0_ = bitField0_;
@@ -3394,32 +3501,39 @@ public final class ExchangeWire {
           return result;
         }
 
+        @java.lang.Override
         public Builder clone() {
           return (Builder) super.clone();
         }
+        @java.lang.Override
         public Builder setField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
             java.lang.Object value) {
           return (Builder) super.setField(field, value);
         }
+        @java.lang.Override
         public Builder clearField(
             com.google.protobuf.Descriptors.FieldDescriptor field) {
           return (Builder) super.clearField(field);
         }
+        @java.lang.Override
         public Builder clearOneof(
             com.google.protobuf.Descriptors.OneofDescriptor oneof) {
           return (Builder) super.clearOneof(oneof);
         }
+        @java.lang.Override
         public Builder setRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
             int index, java.lang.Object value) {
           return (Builder) super.setRepeatedField(field, index, value);
         }
+        @java.lang.Override
         public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
             java.lang.Object value) {
           return (Builder) super.addRepeatedField(field, value);
         }
+        @java.lang.Override
         public Builder mergeFrom(com.google.protobuf.Message other) {
           if (other instanceof net.parasec.pan.exchange.wire.ExchangeWire.Response.OpenOrders) {
             return mergeFrom((net.parasec.pan.exchange.wire.ExchangeWire.Response.OpenOrders)other);
@@ -3462,10 +3576,12 @@ public final class ExchangeWire {
           return this;
         }
 
+        @java.lang.Override
         public final boolean isInitialized() {
           return true;
         }
 
+        @java.lang.Override
         public Builder mergeFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -3724,11 +3840,13 @@ public final class ExchangeWire {
           }
           return limitsBuilder_;
         }
+        @java.lang.Override
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
           return super.setUnknownFieldsProto3(unknownFields);
         }
 
+        @java.lang.Override
         public final Builder mergeUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
           return super.mergeUnknownFields(unknownFields);
@@ -3750,11 +3868,12 @@ public final class ExchangeWire {
 
       private static final com.google.protobuf.Parser<OpenOrders>
           PARSER = new com.google.protobuf.AbstractParser<OpenOrders>() {
+        @java.lang.Override
         public OpenOrders parsePartialFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-            return new OpenOrders(input, extensionRegistry);
+          return new OpenOrders(input, extensionRegistry);
         }
       };
 
@@ -3767,6 +3886,7 @@ public final class ExchangeWire {
         return PARSER;
       }
 
+      @java.lang.Override
       public net.parasec.pan.exchange.wire.ExchangeWire.Response.OpenOrders getDefaultInstanceForType() {
         return DEFAULT_INSTANCE;
       }
@@ -3785,6 +3905,7 @@ public final class ExchangeWire {
      * <code>.exchange.Type type = 1;</code>
      */
     public net.parasec.pan.exchange.wire.ExchangeWire.Type getType() {
+      @SuppressWarnings("deprecation")
       net.parasec.pan.exchange.wire.ExchangeWire.Type result = net.parasec.pan.exchange.wire.ExchangeWire.Type.valueOf(type_);
       return result == null ? net.parasec.pan.exchange.wire.ExchangeWire.Type.UNRECOGNIZED : result;
     }
@@ -3801,6 +3922,7 @@ public final class ExchangeWire {
      * <code>.exchange.Response.Status status = 2;</code>
      */
     public net.parasec.pan.exchange.wire.ExchangeWire.Response.Status getStatus() {
+      @SuppressWarnings("deprecation")
       net.parasec.pan.exchange.wire.ExchangeWire.Response.Status result = net.parasec.pan.exchange.wire.ExchangeWire.Response.Status.valueOf(status_);
       return result == null ? net.parasec.pan.exchange.wire.ExchangeWire.Response.Status.UNRECOGNIZED : result;
     }
@@ -3869,6 +3991,7 @@ public final class ExchangeWire {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -3878,6 +4001,7 @@ public final class ExchangeWire {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (type_ != net.parasec.pan.exchange.wire.ExchangeWire.Type.PING.getNumber()) {
@@ -3895,6 +4019,7 @@ public final class ExchangeWire {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -4036,6 +4161,7 @@ public final class ExchangeWire {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -4043,6 +4169,7 @@ public final class ExchangeWire {
     public static Builder newBuilder(net.parasec.pan.exchange.wire.ExchangeWire.Response prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -4066,6 +4193,7 @@ public final class ExchangeWire {
         return net.parasec.pan.exchange.wire.ExchangeWire.internal_static_exchange_Response_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return net.parasec.pan.exchange.wire.ExchangeWire.internal_static_exchange_Response_fieldAccessorTable
@@ -4088,6 +4216,7 @@ public final class ExchangeWire {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         type_ = 0;
@@ -4105,15 +4234,18 @@ public final class ExchangeWire {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.parasec.pan.exchange.wire.ExchangeWire.internal_static_exchange_Response_descriptor;
       }
 
+      @java.lang.Override
       public net.parasec.pan.exchange.wire.ExchangeWire.Response getDefaultInstanceForType() {
         return net.parasec.pan.exchange.wire.ExchangeWire.Response.getDefaultInstance();
       }
 
+      @java.lang.Override
       public net.parasec.pan.exchange.wire.ExchangeWire.Response build() {
         net.parasec.pan.exchange.wire.ExchangeWire.Response result = buildPartial();
         if (!result.isInitialized()) {
@@ -4122,6 +4254,7 @@ public final class ExchangeWire {
         return result;
       }
 
+      @java.lang.Override
       public net.parasec.pan.exchange.wire.ExchangeWire.Response buildPartial() {
         net.parasec.pan.exchange.wire.ExchangeWire.Response result = new net.parasec.pan.exchange.wire.ExchangeWire.Response(this);
         result.type_ = type_;
@@ -4136,32 +4269,39 @@ public final class ExchangeWire {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.parasec.pan.exchange.wire.ExchangeWire.Response) {
           return mergeFrom((net.parasec.pan.exchange.wire.ExchangeWire.Response)other);
@@ -4191,10 +4331,12 @@ public final class ExchangeWire {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -4232,6 +4374,7 @@ public final class ExchangeWire {
        * <code>.exchange.Type type = 1;</code>
        */
       public net.parasec.pan.exchange.wire.ExchangeWire.Type getType() {
+        @SuppressWarnings("deprecation")
         net.parasec.pan.exchange.wire.ExchangeWire.Type result = net.parasec.pan.exchange.wire.ExchangeWire.Type.valueOf(type_);
         return result == null ? net.parasec.pan.exchange.wire.ExchangeWire.Type.UNRECOGNIZED : result;
       }
@@ -4276,6 +4419,7 @@ public final class ExchangeWire {
        * <code>.exchange.Response.Status status = 2;</code>
        */
       public net.parasec.pan.exchange.wire.ExchangeWire.Response.Status getStatus() {
+        @SuppressWarnings("deprecation")
         net.parasec.pan.exchange.wire.ExchangeWire.Response.Status result = net.parasec.pan.exchange.wire.ExchangeWire.Response.Status.valueOf(status_);
         return result == null ? net.parasec.pan.exchange.wire.ExchangeWire.Response.Status.UNRECOGNIZED : result;
       }
@@ -4506,11 +4650,13 @@ public final class ExchangeWire {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -4532,11 +4678,12 @@ public final class ExchangeWire {
 
     private static final com.google.protobuf.Parser<Response>
         PARSER = new com.google.protobuf.AbstractParser<Response>() {
+      @java.lang.Override
       public Response parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Response(input, extensionRegistry);
+        return new Response(input, extensionRegistry);
       }
     };
 
@@ -4549,6 +4696,7 @@ public final class ExchangeWire {
       return PARSER;
     }
 
+    @java.lang.Override
     public net.parasec.pan.exchange.wire.ExchangeWire.Response getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -4598,7 +4746,7 @@ public final class ExchangeWire {
       "Command.Cancel\022\036\n\005limit\030\003 \001(\0132\017.exchange" +
       ".Limit\032\032\n\006Cancel\022\020\n\010order_id\030\001 \001(\t\"\366\001\n\010R" +
       "esponse\022\034\n\004type\030\001 \001(\0162\016.exchange.Type\022)\n" +
-      "\006status\030\002 \001(\0162\031.exchange.Response.Status",
+      "\006status\030\002 \001(\0162\031.exchange.Response.Status" +
       "\0222\n\013open_orders\030\003 \001(\0132\035.exchange.Respons" +
       "e.OpenOrders\022\020\n\010order_id\030\004 \001(\t\032-\n\nOpenOr" +
       "ders\022\037\n\006limits\030\001 \003(\0132\017.exchange.Limit\",\n" +

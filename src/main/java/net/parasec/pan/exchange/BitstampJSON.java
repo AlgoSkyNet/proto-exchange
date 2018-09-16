@@ -10,7 +10,7 @@ public class BitstampJSON {
         	private double price;
         	private double amount;
         	private int type;
-        	private int id;
+        	private long id;
         	private String datetime;
 
         	private String orig;
@@ -29,7 +29,7 @@ public class BitstampJSON {
             		return type;
         	}
 
-        	public int getId() {
+        	public long getId() {
             		return id;
         	}
 

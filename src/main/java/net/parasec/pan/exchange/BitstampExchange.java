@@ -100,7 +100,7 @@ public class BitstampExchange implements Exchange {
 				return new ExchangeOrderResponse(false, ExchangeError.UNEXPECTED_RESPONSE, response);
 			} else {
 				BitstampJSON.ExchangeOrder eo = BitstampJSON.parseExchangeOrder(response);
-				return new ExchangeOrderResponse(Integer.toString(eo.getId()), response);
+				return new ExchangeOrderResponse(Long.toString(eo.getId()), response);
 			}
 		} catch(Exception e2) {
 			LOG.error(e2, e2);
