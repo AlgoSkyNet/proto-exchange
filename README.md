@@ -1,11 +1,12 @@
-# Exchange 
+# Bitstamp proto-exchange
 
-> Pan exchange connectivity
+> exchange connectivity
 
-* exchange interaction (abstracts away exchanges) / also router?
-* low-level/primitive order execution
+This server acts as a gateway to [Bitstamp](https://www.bitstamp.net/) API.
+A primitive [limit order protocol](https://github.com/phil8192/proto-exchange/blob/master/src/main/proto/exchange.proto)
+is exposed over [0mq](http://zeromq.org/).
 
-## 0mq
+## 0mq (jeromq)
 
 * [jeromq](https://github.com/zeromq/jeromq) see [jeromq wiki](https://github.com/zeromq/jeromq/wiki)
 
